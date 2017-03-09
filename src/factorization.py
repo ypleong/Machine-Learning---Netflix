@@ -1,5 +1,6 @@
-import trainModel
 import numpy as np
+
+import trainModel
 
 data = np.genfromtxt('data.txt')
 
