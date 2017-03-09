@@ -1,4 +1,4 @@
-# Machine-Learning---Netflix
+# Machine Learning - Unsupervised Learning
 
 CS 155 Machine Learning & Data Mining
 
