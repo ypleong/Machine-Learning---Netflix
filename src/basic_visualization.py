@@ -24,12 +24,7 @@ def load_data(moviefile, datafile):
             movie_genre[int(split_line[0])] = [int(item) for item in split_line[2:]]
             movie_dict[int(split_line[0])] = split_line[1]
 
-    user_data = []
-    with open(datafile, 'r') as f:
-        for line in f.readlines():
-            split_lines = line.split('\r')
-        for line in split_lines:
-            user_data.append([int(item) for item in line.split('\t')])
+    user_data = np.genfromtxt(datafile)
 
     return movie_genre, user_data, movie_dict
 
@@ -72,8 +67,6 @@ def create_top10_plot(data, movie_dict, movie_ratings_dict, plot_title):
 
 
 movie_genre, user_data, movie_dict = load_data('../project3data/movies.txt', '../project3data/data.txt')
-
-user_data = np.array(user_data)
 
 movie_ratings_dict = defaultdict(list)
 for key, rating in user_data[:, 1:]:
