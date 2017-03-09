@@ -16,7 +16,7 @@ def get_err(U, V, Y):
         err += 0.5 *(Yij - np.dot(U[i-1], V[:,j-1]))**2
     return err / float(len(Y))
 
-def train_model(M, N, K, eta, reg, Y, eps=0.0001, max_epochs=300):
+def train_model(M, N, K, eta, reg, Y, eps=0.0001, max_epochs=2):
     U = np.random.random((M,K)) - 0.5
     V = np.random.random((K,N)) - 0.5
     size = Y.shape[0]
