@@ -1,7 +1,7 @@
-import trainModel
 import numpy as np
+import trainModel
 
-data = np.genfromtxt('project3data/data.txt')
+data = np.genfromtxt('data.txt')
 
 M = np.amax(data[:,0]).astype(int)
 N = np.amax(data[:,1]).astype(int)
