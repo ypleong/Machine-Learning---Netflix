@@ -29,7 +29,7 @@ def load_data(moviefile, datafile):
     return movie_genre, user_data, movie_dict
 
 
-def most_popular_movie(movie_rating_dict):
+def most_popular_movie(movie_ratings_dict):
     movie_rating_count = {}
     movie_rating_average = {}
     for key, value in movie_ratings_dict.iteritems():
@@ -39,7 +39,35 @@ def most_popular_movie(movie_rating_dict):
     d1 = Counter(movie_rating_count)
     d2 = Counter(movie_rating_average)
 
-    return d1.most_common(10), d2.most_common(10)
+    return d1.most_common(), d2.most_common()
+
+
+def get_movies_from_genre(movie_genre, genre):
+    movie_list = []
+    for key, value in movie_genre.iteritems():
+        if value[genre] == 1:
+            movie_list.append(key)
+
+    return movie_list
+
+
+def create_all_ratings_in_dataset(movie_ratings_dict, plot_title, movie_list=None, genre_title='All movie ratings'):
+    fig, axx = plt.subplots()
+
+    all_ratings = []
+    for item, ratings in movie_ratings_dict.iteritems():
+        if movie_list is None:
+            all_ratings.append(np.mean(ratings))
+        else:
+            if item in movie_list:
+                all_ratings.append(np.mean(ratings))
+
+    axx.set_title(genre_title)
+    axx.hist(all_ratings, bins=[item/2. for item in range(2, 11)])
+    plt.xlabel('Average ratings')
+    plt.ylabel('Frequency')
+    plt.savefig(plot_title)
+    plt.close()
 
 
 def create_top10_plot(data, movie_dict, movie_ratings_dict, plot_title):
@@ -64,15 +92,77 @@ def create_top10_plot(data, movie_dict, movie_ratings_dict, plot_title):
 
     matplotlib.rcParams.update({'font.size': 10})
     plt.savefig(plot_title)
+    plt.close()
+
+
+def create_plots_per_genre(movie_list, movie_dict, movie_ratings_dict, plot_title):
+    nn = len(movie_list)
+    fig, ax = plt.subplots(int(np.ceil(float(nn)/5)), 5, sharey=True)
+    width = 1.0
+    fig.subplots_adjust(hspace=0.5)
+    count = 0
+
+    for ind, movie in enumerate(movie_list):
+        a = Counter(movie_ratings_dict[movie])
+        x = range(5)
+        height = [a[item] for item in range(1, 6)]
+
+        if ind > 0 and ind % 5 == 0:
+            count += 1
+
+        if nn < 5:
+            axx = ax[ind]
+        else:
+            axx = ax[count, ind-5*count]
+
+        axx.bar(x, height, width)
+        axx.set_title("\n".join(wrap(movie_dict[movie], 18)), fontsize=10)
+        axx.set_xticks([i + width / 2 for i in x])
+        axx.set_xticklabels([item + 1 for item in x])
+
+    matplotlib.rcParams.update({'font.size': 10})
+    plt.savefig(plot_title)
+    plt.close()
 
 
 movie_genre, user_data, movie_dict = load_data('../project3data/movies.txt', '../project3data/data.txt')
+
+genre_dict = ['Unknown', 'Action', 'Adventure', 'Animation', 'Childrens',
+              'Comedy', 'Crime', 'Documentary', 'Drama', 'Fantasy',
+              'Film-Noir', 'Horror', 'Musical', 'Mystery',
+              'Romance', 'Sci-Fi', 'Thriller', 'War', 'Western']
 
 movie_ratings_dict = defaultdict(list)
 for key, rating in user_data[:, 1:]:
     movie_ratings_dict[key].append(rating)
 
-most_popular_movies_10, best_movies_10 = most_popular_movie(movie_ratings_dict)
+most_popular_movies, best_movies = most_popular_movie(movie_ratings_dict)
 
-create_top10_plot(most_popular_movies_10, movie_dict, movie_ratings_dict, '../output/top_10_popular_movie.pdf')
-create_top10_plot(best_movies_10, movie_dict, movie_ratings_dict, '../output/top_10_best_movie.pdf')
+# for i in range(len(movie_genre[1])):
+#     movie_genre_one = get_movies_from_genre(movie_genre, i)
+#     # create_plots_per_genre(movie_genre_1, movie_dict, movie_ratings_dict, '../output/movie_genre_0.pdf')
+#     create_all_ratings_in_dataset(movie_ratings_dict,
+#                                   '../output/movie_genre_' + str(i) + '.pdf',
+#                                   movie_list=movie_genre_one, genre_title=genre_dict[i])
+
+# create_all_ratings_in_dataset(movie_ratings_dict, '../output/all_movie_ratings.pdf')
+# create_top10_plot(most_popular_movies[0:10], movie_dict, movie_ratings_dict, '../output/top_10_popular_movie.pdf')
+# create_top10_plot(best_movies[0:10], movie_dict, movie_ratings_dict, '../output/top_10_best_movie.pdf')
+
+
+best_movies = np.array([[item[0], item[1]] for item in best_movies])
+most_popular_movies = np.array([[item[0], item[1]] for item in most_popular_movies])
+
+fig, ax1 = plt.subplots()
+ax1.stem(most_popular_movies[best_movies[:, 0].astype(int)-1, 1], markerfmt=' ')
+ax2 = ax1.twinx()
+ax2.plot(best_movies[:, 1], 'r', linewidth=2)
+plt.savefig('test.pdf')
+plt.close()
+
+fig, ax1 = plt.subplots()
+ax1.stem(best_movies[most_popular_movies[:, 0].astype(int)-1, 1], markerfmt=' ')
+ax2 = ax1.twinx()
+ax2.plot(most_popular_movies[:, 1], 'r', linewidth=2)
+plt.savefig('test2.pdf')
+plt.close()
