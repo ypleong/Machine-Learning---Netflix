@@ -1,5 +1,4 @@
 import numpy as np
-
 import trainModel
 
 data = np.genfromtxt('data.txt')
@@ -11,7 +10,7 @@ eta = 2e-3
 reg = 0.01
 
 
-results = trainModel.train_model(M, N, K, eta, reg, data, eps=0.0001, max_epochs=500)
+results = trainModel.train_model(M, N, K, eta, reg, data, eps=0.0001, max_epochs=2)
 
 np.savetxt('U_matrix.csv',results[0],delimiter=',')
 np.savetxt('V_matrix.csv',results[1],delimiter=',')
