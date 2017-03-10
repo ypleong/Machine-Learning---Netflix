@@ -144,12 +144,12 @@ for key, rating in user_data[:, 1:]:
 
 most_popular_movies, best_movies = most_popular_movie(movie_ratings_dict)
 
-# for i in range(len(movie_genre[1])):
-#     movie_genre_one = get_movies_from_genre(movie_genre, i)
-#     # create_plots_per_genre(movie_genre_1, movie_dict, movie_ratings_dict, '../output/movie_genre_0.pdf')
-#     create_all_ratings_in_dataset(movie_ratings_dict,
-#                                   '../output/movie_genre_' + str(i) + '.pdf',
-#                                   movie_list=movie_genre_one, genre_title=genre_dict[i])
+for i in range(len(movie_genre[1])):
+    movie_genre_one = get_movies_from_genre(movie_genre, i)
+    # create_plots_per_genre(movie_genre_1, movie_dict, movie_ratings_dict, '../output/movie_genre_0.pdf')
+    create_all_ratings_in_dataset(movie_ratings_dict,
+                                  '../output/movie_genre_' + str(i) + '.pdf',
+                                  movie_list=movie_genre_one, genre_title=genre_dict[i])
 
 create_all_ratings_in_dataset(movie_ratings_dict, '../output/all_movie_ratings.pdf')
 create_top10_plot(most_popular_movies[0:10], movie_dict, movie_ratings_dict,
@@ -161,21 +161,14 @@ create_top10_plot(best_movies[0:10], movie_dict, movie_ratings_dict,
 best_movies = np.array([[item[0], item[1]] for item in best_movies])
 most_popular_movies = np.array([[item[0], item[1]] for item in most_popular_movies])
 
-# fig, ax1 = plt.subplots()
-# ax1.stem(most_popular_movies[best_movies[:, 0].astype(int)-1, 1], markerfmt=' ')
-# ax1.set_ylabel('Total number of ratings')
-# ax2 = ax1.twinx()
-# ax2.plot(best_movies[:, 1], 'r', linewidth=2)
-# ax2.set_ylabel('Average ratings')
-# ax1.set_xlabel('Movie Sorted By Total Number of Ratings')
-# plt.xlim([0, len(best_movies[:, 0])])
-# plt.title('All MovieLens Dataset')
-# plt.savefig('../output/sorted_ratings.pdf')
-# plt.close()
-
-# fig, ax1 = plt.subplots()
-# ax1.stem(best_movies[most_popular_movies[:, 0].astype(int)-1, 1], markerfmt=' ')
-# ax2 = ax1.twinx()
-# ax2.plot(most_popular_movies[:, 1], 'r', linewidth=2)
-# plt.savefig('test2.pdf')
-# plt.close()
+fig, ax1 = plt.subplots()
+ax1.stem(most_popular_movies[best_movies[:, 0].astype(int)-1, 1], markerfmt=' ')
+ax1.set_ylabel('Total number of ratings')
+ax2 = ax1.twinx()
+ax2.plot(best_movies[:, 1], 'r', linewidth=2)
+ax2.set_ylabel('Average ratings')
+ax1.set_xlabel('Movie Sorted By Total Number of Ratings')
+plt.xlim([0, len(best_movies[:, 0])])
+plt.title('All MovieLens Dataset')
+plt.savefig('../output/sorted_ratings.pdf')
+plt.close()
