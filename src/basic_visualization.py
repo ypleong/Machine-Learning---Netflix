@@ -63,6 +63,9 @@ def create_all_ratings_in_dataset(movie_ratings_dict, plot_title, movie_list=Non
             if item in movie_list:
                 all_ratings.append(np.mean(ratings))
 
+        if np.mean(ratings) == 5:
+            pass
+
     axx.set_title(genre_title)
     axx.hist(all_ratings, bins=[item/2. for item in range(2, 11)])
     plt.xlabel('Average ratings')
@@ -144,7 +147,7 @@ for key, rating in user_data[:, 1:]:
 
 most_popular_movies, best_movies = most_popular_movie(movie_ratings_dict)
 
-for i in range(len(movie_genre[1])):
+for i in [4]:  # range(len(movie_genre[1])):
     movie_genre_one = get_movies_from_genre(movie_genre, i)
     # create_plots_per_genre(movie_genre_1, movie_dict, movie_ratings_dict, '../output/movie_genre_0.pdf')
     create_all_ratings_in_dataset(movie_ratings_dict,
@@ -167,7 +170,7 @@ ax1.set_ylabel('Total number of ratings')
 ax2 = ax1.twinx()
 ax2.plot(best_movies[:, 1], 'r', linewidth=2)
 ax2.set_ylabel('Average ratings')
-ax1.set_xlabel('Movie Sorted By Total Number of Ratings')
+ax1.set_xlabel('Movie Sorted By Average Ratings')
 plt.xlim([0, len(best_movies[:, 0])])
 plt.title('All MovieLens Dataset')
 plt.savefig('../output/sorted_ratings.pdf')
