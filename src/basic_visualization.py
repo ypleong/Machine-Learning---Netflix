@@ -147,7 +147,7 @@ for key, rating in user_data[:, 1:]:
 
 most_popular_movies, best_movies = most_popular_movie(movie_ratings_dict)
 
-for i in [4]:  # range(len(movie_genre[1])):
+for i in range(len(movie_genre[1])):
     movie_genre_one = get_movies_from_genre(movie_genre, i)
     # create_plots_per_genre(movie_genre_1, movie_dict, movie_ratings_dict, '../output/movie_genre_0.pdf')
     create_all_ratings_in_dataset(movie_ratings_dict,
