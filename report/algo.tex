@@ -1,1 +1,22 @@
 \section{Matrix Factorization Algorithm}
+
+\medskip
+
+\subsection{Training U and V}
+
+~
+
+We used the TA solution (prob2utils.py) to train $U$ and $V$  (matrix factorization of Y) to minimize the objective function:
+
+$$\frac{\lambda}{2} ( ||U||_{Fro}^2 + ||V||_{Fro}^2) + \sum_{ij} (y_{ij} - u_i^T v_j)^2$$
+
+We took the regularization parameter $\lambda = 0.01$, similar to what we used in HW \#6. The goal was to approximate $U$ and $V$ such that $Y \approx U V^T$. 
+
+\subsection{Projecting U and V}
+
+In order to visualize the resulting latent factors, we wanted to project $U$ and $V$ onto a two-dimensional space. The first thing we do though, is mean center $V$ and also shift $U$ accordingly.  This ensure that each row of $V$, representing a characteristic weighting of movies, is zero-centered and $U$ is consistently shifted with $V$. 
+
+Then we applied an SVD to $U$ and $V$ so that $U = A_U \Sigma_U B_U^T$ and $V = A_V \Sigma_V B_V^T$. The first 2 columns of $A_V$ correspond to the best 2-dimensional projection of movies, and the first 2 columns of $A_U$ correspond to the best 2-dimensional projection of users.
+
+Then $\tilde{V} = A_{V(1:2)}^T V$ projects the movies onto a 2-dimensional space representing the top 2 principal components of $V$ (the 2 dimensions that capture the most variance in movies). Also $\tilde{U} = A_{U(1:2)}^T U$ does the same thing for users rather than movies. Finally, we scaled each row of $\tilde{V}$ and $\tilde{U}$ to have unit variance so that the axes would not look too stretched.
+
