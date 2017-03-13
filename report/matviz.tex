@@ -1,8 +1,8 @@
 \section{Matrix Factorization Visualization}
 
-For each movie \textit{j} we visualize it as a 2D vector using the coordinates $\bar{V}[1:2,j]$, where $\bar{V}$ is obtained from the previous section. We show 10 random movies in Figure~\ref{fig:tenRandom}, the most popular 10 movies in Figure~\ref{fig:tenMostPopular} and the best 10 movies in Figure~\ref{fig:tenBest}. In general there is little correlation between distance in the plots and movie similarity as seen by the authors. For example, Scream and Star Wars are very close in Figure~\ref{fig:tenMostPopular} but we don't think they are very similar.
+For each movie \textit{j}, it can be visualized as a 2D vector using the coordinates $\tilde{V}[:,j]$ ($j^{th}$ column of $\tilde{V}$), where $\tilde{V}$ is obtained from the previous section. We show 10 random movies in Figure~\ref{fig:tenRandom}, the most popular 10 movies in Figure~\ref{fig:tenMostPopular} and the best 10 movies in Figure~\ref{fig:tenBest}. In general there is little correlation between distance in the plots and movie similarity as seen by the authors. For example, Scream and Star Wars are very close in Figure~\ref{fig:tenMostPopular} even though the movies do not seem similar. 
 
-We observe that the most popular 10 movies are located along the line $(1,1)$ while the best 10 movies cover the 2D space more uniformly. This distribution is still unclear and it might be a coincidence.  
+We observe that the most popular 10 movies seemed to be divided (into 2 spaces) by the line $y = x$, while the best 10 movies cover the 2D space more uniformly. The reason for this trend is unclear and may be a simple coincidence.  
 
 \begin{figure}[hptb]
 \centering
@@ -27,8 +27,7 @@ We observe that the most popular 10 movies are located along the line $(1,1)$ wh
 \label{fig:tenMostPopular}
 \end{figure}
 
-Figure~\ref{fig:tg} shows the representation for the genres horror, children and fantasy. The movies within each genre are loosely cluster together, for example horror movies are mostly located on the bottom left corner and fantasy movies on the upper right corner. We can visualize the mean representation with its variance for each genre in Figure~\ref{fig:tgMV}. In general the variance as large as the distance between mean centers, therefore we should expect loose clusters as observed. 
-
+Figure~\ref{fig:tg} shows the representation for 10 random movies within the genres: horror, children and fantasy. The chosen movies within each genre are loosely clustered together, for example horror movies are mostly located on the bottom left corner and fantasy movies on the upper right corner. We can visualize the mean representation with its variance for each genre in Figure~\ref{fig:tgMV}. However, in general, the variance for each given genre is as large as the distance between genre mean centers. Therefore any clustering should be very loose, as observed in the visualization.
 
 \begin{figure}[hptb]
 \centering
@@ -51,6 +50,6 @@ Figure~\ref{fig:tg} shows the representation for the genres horror, children and
 \label{fig:tgMV}
 \end{figure}
 
-Comparing with the Figure \ref{fig:average-3-genres} and \ref{fig:tgMeanGenre}, we hypothesize that the x axis represents the skewness of the average movie rating distribution. A larger x value implies that the rating distribution skews to the left (i.e. more lower ratings than higher ratings), and a smaller x value implies otherwise.
+Finally, comparing Figure \ref{fig:average-3-genres} and Figure \ref{fig:tgMeanGenre}, we hypothesize that the x axis represents the skew of the average movie rating distribution. A larger x value implies that the rating distribution skews to the left (i.e. more lower ratings than higher ratings), and a smaller x value implies the opposite. This seems to be a trend within the data. when we look at the rating distribution within each of these genres. 
 
 
