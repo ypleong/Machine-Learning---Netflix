@@ -4,7 +4,7 @@ For each movie \textit{j}, it can be visualized as a 2D vector using the coordin
 
 We observe that the most popular 10 movies seemed to be divided (into 2 spaces) by the line $y = x$, while the best 10 movies cover the 2D space more uniformly. The reason for this trend is unclear and may be a simple coincidence.  
 
-\begin{figure}[hptb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth, trim = 2cm 2.5cm 2cm 1.8cm, clip=true]{Random_10_Movies.pdf}
  \caption{Ten Random movies projected along two principal components.}
@@ -12,7 +12,7 @@ We observe that the most popular 10 movies seemed to be divided (into 2 spaces) 
 \end{figure}
 
 
-\begin{figure}[hptb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth, trim = 2cm 2.8cm 2cm 2.5cm, clip=true]{Best_10_Movies.pdf}
  \caption{Best ten movies projected along two principal components.}
@@ -20,30 +20,30 @@ We observe that the most popular 10 movies seemed to be divided (into 2 spaces) 
 \end{figure}
 
 
-\begin{figure}[hptb]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.73\textwidth, trim = 2cm 2.8cm 2cm 2.5cm, clip=true]{Popular_10_Movies.pdf}
+\includegraphics[width=0.9\textwidth, trim = 2cm 2.8cm 2cm 2.5cm, clip=true]{Popular_10_Movies.pdf}
  \caption{Most popular ten movies projected along two principal components.}
 \label{fig:tenMostPopular}
 \end{figure}
 
 Figure~\ref{fig:tg} shows the representation for 10 random movies within the genres: horror, children and fantasy. The chosen movies within each genre are loosely clustered together, for example horror movies are mostly located on the bottom left corner and fantasy movies on the upper right corner. We can visualize the mean representation with its variance for each genre in Figure~\ref{fig:tgMV}. However, in general, the variance for each given genre is as large as the distance between genre mean centers. Therefore any clustering should be very loose, as observed in the visualization.
 
-\begin{figure}[hptb]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth, trim = 2cm 3cm 2cm 3cm, clip=true]{Three_Genres.pdf}
+\includegraphics[width=0.85\textwidth, trim = 2cm 3cm 2cm 3cm, clip=true]{Three_Genres.pdf}
  \caption{Ten random movies for the genres horror, fantasy and children. }
 \label{fig:tg}
 \end{figure}
 
-\begin{figure}[hptb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth, angle =0, trim = 2cm 1cm 2cm 1cm, clip=true]{Mean_Genre.png}
  \caption{Mean Coordinates for each genre with variance.}
 \label{fig:tgMeanGenre}
 \end{figure}
 
-\begin{figure}[hptb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth, angle =0, trim = 2cm 1cm 2cm 1cm, clip=true]{Mean_Genre_Variance.png}
  \caption{Mean Coordinate with variance for our selection of 3 genres. We also show documentary for reference as a genre far from our selection.}
