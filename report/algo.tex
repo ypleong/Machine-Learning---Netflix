@@ -6,15 +6,15 @@
 
 ~
 
-We used the TA solution (prob2utils.py) to train $U$ and $V$  (matrix factorization of Y) to minimize the objective function:
+We used the TA solution (prob2utils.py) to train $U \in \mathbb{R}^{k x M}$ and $V \in \mathbb{R}^{k x N}$  (matrix factorization of Y) to minimize the objective function:
 
 $$\frac{\lambda}{2} ( ||U||_{Fro}^2 + ||V||_{Fro}^2) + \sum_{ij} (y_{ij} - u_i^T v_j)^2$$
 
-We took the regularization parameter $\lambda = 0.01$, similar to what we used in HW \#6. The goal was to approximate $U$ and $V$ such that $Y \approx U V^T$. 
+Here $M$ is the number of users, $N$ is the number of movies, and $k$ is the self-imposed number of latent factors. We chose k=20 as detailed in the problem statement. We took the regularization parameter $\lambda = 0.01$, similar to what we used in HW \#6. Finally, for the stopping criteria, we chose to stop the algorithm when the error reduction after an epoch (relative to the initial error reduction) was equal to 0.0001. This was a smaller ratio than what we used in HW \#6 and showed good convergence, thus suggesting to us that this was a sufficient stopping criteria. We also set an epoch limit of 500, although we never reached this limit. The goal of the algorithm was to approximate $U$ and $V$ such that $Y \approx U^T V$. 
 
 \subsection{Projecting U and V}
 
-In order to visualize the resulting latent factors, we wanted to project $U$ and $V$ onto a two-dimensional space. The first thing we do though, is mean center $V$ and also shift $U$ accordingly.  This ensure that each row of $V$, representing a characteristic weighting of movies, is zero-centered and $U$ is consistently shifted with $V$. 
+In order to visualize the resulting latent factors, we wanted to project $U$ and $V$ onto a two-dimensional space. The first thing we do though, is mean center $V$ and also shift $U$ accordingly. 
 
 Then we applied an SVD to $U$ and $V$ so that $U = A_U \Sigma_U B_U^T$ and $V = A_V \Sigma_V B_V^T$. The first 2 columns of $A_V$ correspond to the best 2-dimensional projection of movies, and the first 2 columns of $A_U$ correspond to the best 2-dimensional projection of users.
 
